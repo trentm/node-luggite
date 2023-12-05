@@ -7,7 +7,7 @@ possible, but good enough for what I want.
 
 Goal: A small and simple logging library that is reasonably performant without
 the cost of complexity. It targets structured (JSON) logging. It should almost
-always be usable, which implies: support for old Node.js version, eventually
+always be usable, which implies: support for old Node.js versions, eventually
 other runtimes, minimal deps, easy to start using, understand and debug.
 
 To start I'm stripping down Bunyan to the bare minimum, perhaps with some
@@ -148,7 +148,7 @@ Notes:
   https://getpino.io/#/docs/api?id=loggerchildbindings-options-gt-logger with
   many of the ctor options: level, msgPrefix, redact, serializers,
 
-# streams / destinations
+## streams / destinations
 
 NYI. Planned for M3.
 
@@ -158,6 +158,21 @@ Notes:
 - What about support pino.destination(...) values directly. Is there a clear
   API for this? Is it just `.write()`?
 
+# Minimum supported Node.js
+
+I'd love to support earlier than Node.js v10, but I'm using
+`safe-stable-stringify` and there isn't a demonstrated need to support earlier
+than v10.
+
+- deps:
+  - `safe-stable-stringify` has `"node": ">=10"`
+- features and the Node.js version
+  - `class`, node 6
+  - arrow functions, node 4
+  - Object.assign, node 4
+  - `const`, basic support was in node 0.10. Good enough?
+  - object destructuring, something newer than node 0.10
+  - object property shorthard (`exports = { TRACE }`), something new than node 0.10
 
 # TODO
 
