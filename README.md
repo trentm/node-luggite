@@ -166,11 +166,11 @@ Notes:
 First milestone will not have user-definable streams. It is hardcoded to stdout.
 Multiple and customizable streams will come later. Also perhaps no .child()
 
-- start stripping down
-- decide on time field
-- use cases and tests for them
-- testing with lowest Node.js version early if supporting really old
 - use that json stringify dep that all are using
+- tests: start, start moving in Bunyan tests
+- testing with lowest Node.js version early if supporting really old
+- decide on time field:
+  - perf call?
 - log fn signature: same as bunyan? Compare with pino edge cases. Do they
   differ?
 - change/fix `createLogger` API to separate fields/bindings from config
