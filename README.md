@@ -179,9 +179,8 @@ than v10.
 ## M1 - stdout output only
 
 First milestone will not have user-definable streams. It is hardcoded to stdout.
-Multiple and customizable streams will come later. Also perhaps no .child()
+Multiple and customizable streams will come later.
 
-- use that json stringify dep that all are using
 - tests: start, start moving in Bunyan tests
 - testing with lowest Node.js version early if supporting really old
 - decide on time field:

@@ -23,7 +23,9 @@
   "scripts": {
     "lint": "eslint --ext=js,mjs,cjs . # requires node >=16.0.0",
     "lint:fix": "eslint --ext=js,mjs,cjs --fix . # requires node >=16.0.0",
-    "test": "tape 'test/**/*.test.js'"
+    "test": "tape 'test/**/*.test.js'",
+    "test:minver": "./scripts/test-with-node-vers.sh 10.0.0",
+    "test:allvers": "./scripts/test-with-node-vers.sh 10.0.0 10 12 14 16 18 20 21"
   },
   "devDependencies": {
     "eslint": "^8.55.0",
