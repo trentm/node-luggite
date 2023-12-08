@@ -267,4 +267,12 @@ Multiple and customizable streams will come later.
   Helpful, or no? Could be solved by docs.
 
 
+## Someday / Maybe
+
+- Restore sourcemap support to the captured stack trace in getCaller3Info.
+  This is only relevant if `getCaller3Info` is used for functionality like
+  Bunyan's `src: true`. The sourcemap support was originally added as
+  interesting for *CoffeeScript* users. Need a modern use case; TypeScript
+  and bundling seem more likely.
+
 
