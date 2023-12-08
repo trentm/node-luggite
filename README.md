@@ -274,5 +274,6 @@ Multiple and customizable streams will come later.
   Bunyan's `src: true`. The sourcemap support was originally added as
   interesting for *CoffeeScript* users. Need a modern use case; TypeScript
   and bundling seem more likely.
+  (The source-map usage was removed in commit ec35812.)
 
 
