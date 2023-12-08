@@ -1,3 +1,4 @@
+// For now this can be used to play with comparing luggite, bunyan, and pino.
 var framework = process.argv[2] || 'luggite';
 var createLogger;
 var minimalCreateOpts = {};
@@ -23,7 +24,6 @@ switch (framework) {
 var minLog = createLogger(minimalCreateOpts);
 minLog.info('minLog hi');
 
-// ---- M1
 const log = createLogger({
     name: 'example',
     level: 'trace',
@@ -49,11 +49,9 @@ var cause = new Error('the cause');
 var err = new Error('boom', {cause: cause}); // err.cause in Node.js 16
 err.code = 42;
 err.eggs = 'spam';
-// XXX clarity on 'cause' handling
-// XXX clarity on `.eggs` extra fields
+// TODO clarity on 'cause' handling
+// TODO clarity on `.eggs` extra fields
 log.info(err, 'an error');
-// XXX this is incorrect still
-//  node example.js | rg err -w | json -ga
 log.info({err: err}, 'an error2');
 
 // ---- M2

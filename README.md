@@ -59,9 +59,9 @@ currently) be for you:
       collides with a top-level option.
     - no 'stream' or 'streams' for now.
 - fields:
-    - no defaults
+    - no defaults (i.e. no "hostname" and "pid" fields by default)
     - 'name' optional
-    - 'time' format might change
+    - 'time' format might change (TODO)
 - `err` serializer:
     - It no longer handles an `err.cause()` *function* which was a node-verror
       thing. Much later came https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Error/cause for which support will be added.
@@ -91,7 +91,7 @@ var log = createLogger({
 ```
 // log.info([recordFields], [message], [...args])
 
-log.info()  // XXX does what again? `isInfoEnabled()`? Yes.
+log.info()
 log.info(err)
 log.info({foo: 'bar'})
 log.info({foo: 'bar'}, 'a message')
@@ -119,10 +119,20 @@ Dev Notes:
 ## Core fields
 
 - level
-- time?
-    My inclination is to start with ms since epoch (JS's native Date.now(), but
-    grok/consider performance.now()ish high res timing. What does a browser/chrome
-    trace use?
+- time
+    My inclination is to consider ms since epoch (JS's native Date.now(), but
+    grok/consider performance.now()ish high res timing.
+
+    Pros for NOT using ISO-time:
+    - Faster than `Date().toISOTime()`.
+
+    Pros for ISO-time:
+    - Comparing the time of log lines without a pretty-printing is easier.
+    - We *could* include TZ info, though we don't currently. Also hasn't
+      come up as helpful IME.
+    - There isn't an overflow issue.
+
+    What does a browser/chrome trace use?
     - ecs-logging: `@timestamp`, ISO time
     - pino: `time`, ms since epoch, for speed
     - winston: ???
@@ -178,19 +188,13 @@ Features and the Node.js version required for them
 
 # TODO
 
-## M1 (0.1.0) - stdout output only, some API and field formats might change
-
-First milestone will not have user-definable streams; it is hardcoded to stdout.
-Multiple and customizable streams will come later. There are no user-definable
-serializers, just the built-in `err` serializer.
-
-WARNING: `log.level()` API might change. `time` field format might change.
-
 ## M2 - `.child()`, perf/benchmarking, time format, `log.level` API change
 
 - simplify the `log.info(err, msg)` case to just have `{err: err}` and pass to
   later code? Can that obsolete the second arg to _applySerializers?
 - switch to pino's `log.level`  setter/getter? rather than overloaded `log.level([level])`? I think pino's is cleaner.
+- perhaps change `log.info()` no args to a separate API call? Not sure. How
+  much of a perf gain is not having that boolean check?
 - perf: pino sets `.debug` et al to function noop if Logger level is higher. That
   might help with perf. That means setting those attributes on the instance
   rather than on the prototype, FWIW.
@@ -201,7 +205,7 @@ WARNING: `log.level()` API might change. `time` field format might change.
 - `.child()` ?
     ```js
         if (parent && opts.name) {
-            // XXX does pino.child allow changing 'name'? Is there a strong reason we don't allow this?
+            // TODO does pino.child allow changing 'name'? Is there a strong reason we don't allow this?
             throw new TypeError('invalid options.name: child cannot set logger name');
         }
     ```
