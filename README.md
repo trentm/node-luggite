@@ -180,14 +180,20 @@ Features and the Node.js version required for them
 
 ## M1 - stdout output only
 
-First milestone will not have user-definable streams. It is hardcoded to stdout.
-Multiple and customizable streams will come later.
+First milestone will not have user-definable streams; it is hardcoded to stdout.
+Multiple and customizable streams will come later. There are no user-definable
+serializers, just the built-in `err` serializer.
 
-- log fn signature: same as bunyan? Compare with pino edge cases. Do they
-  differ?
+WARNING: `log.level()` might change. `time` field might change.
+
 - moar tests
 - decide on time field:
   - perf call?
+- simplify the `log.info(err, msg)` case to just have `{err: err}` and pass to
+  later code? Can that obsolete the second arg to _applySerializers?
+- switch to pino's `log.level`  setter/getter? rather than overloaded `log.level([level])`? I think pino's is cleaner.
+- perf: pino sets `.debug` to function noop if Logger level is higher. That
+  might help with perf
 
 ## M2 - `.child()`
 
@@ -221,6 +227,10 @@ Multiple and customizable streams will come later.
 
 ## later
 
+- levels: pino adds "silent". elastic APM has "off".
+- types
+- CLI for pretty printing
+
 * * *
 
 - Are there enough core fields to identify this for rendering? E.g. to know
@@ -233,15 +243,13 @@ Multiple and customizable streams will come later.
       move to Go or Rust for speed/distribution.
 - Support embedding (e.g. in etel). Single file is helpful. Doc section mentioning
   hopefully only single dep.
-- What to support formatting (a la pino `formatters.*`) for other output formats?
+- What to support formatting (a la pino `formatters.`) for other output formats?
   E.g. could this have canned for pino, bunyan, ecs-logging, otel-ish?
 - Exporting a `NoopLogger` useful? Or use `enabled` field a la pino?
 - Import 'redact' from pino. That seems useful. Should that live on a raw
   stream, however?
 - otel suggested mappings? Not sure if useful, because cannot impact Resource
   attributes in Logs Bridge API.
-- levels: pino adds "silent". elastic APM has "off".
-- types
 - All 're-evals' from above.
 - Clarify why this exists and not just use pino. If I can't, then drop this.
 - perf: Incorporate into pino benchmarks. Do I do the pre-serialized bindings
@@ -256,6 +264,10 @@ Multiple and customizable streams will come later.
       about the separate RotatingFileStream from years ago)
 - Re-add serializers?
 - restore 'src' option?
+- log fn signature: Compare bunyan and pino edge cases. Are ther other diffs than
+  this first one?
+  - In pino v6 (?), pino dropped the `...args` passing to `util.format`. I
+    don't know the main motivation for that, but I'd like to keep it.
 - Browser support? That would fit with the "always usable" theme.
     - Re-add the `runtimeEnv` stuff from Bunyan in some form. The default
       ConsoleRawStream() for the browser.
@@ -277,5 +289,9 @@ Multiple and customizable streams will come later.
   interesting for *CoffeeScript* users. Need a modern use case; TypeScript
   and bundling seem more likely.
   (The source-map usage was removed in commit ec35812.)
+- commit 8cc03b8 `s/objCopy/Object.assign/`. Can one break luggite with
+  weird non-objects that make it to Object.assign calls? Try it. The reason
+  to use Object.assign was an unmeasured assumption that it would be more
+  robust and faster.
 
 
