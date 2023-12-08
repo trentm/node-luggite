@@ -1,6 +1,5 @@
 // Test logging an Error object.
 
-var {format} = require('util');
 var test = require('tape');
 var luggite = require('../');
 
