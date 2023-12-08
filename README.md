@@ -181,24 +181,11 @@ than v10.
 First milestone will not have user-definable streams. It is hardcoded to stdout.
 Multiple and customizable streams will come later.
 
-- tests: start, start moving in Bunyan tests
-- testing with lowest Node.js version early if supporting really old
-- decide on time field:
-  - perf call?
 - log fn signature: same as bunyan? Compare with pino edge cases. Do they
   differ?
-- change/fix `createLogger` API to separate fields/bindings from config
-- what base node version? Any point in older than node v8?
-    - what min ver does ljharb support for tape, etc.?
-        "bin/tape requires node 8+, but the rest of tape supports 0.4+"
-        GH Actions tests seem to go back to 0.8
-    - features:
-      - `class`, node 6
-      - arrow functions, node 4
-      - Object.assign, node 4
-      - `const`, basic support was in node 0.10. Good enough?
-      - object destructuring, something newer than node 0.10
-      - object property shorthard (`exports = { TRACE }`), something new than node 0.10
+- moar tests
+- decide on time field:
+  - perf call?
 
 ## M2 - `.child()`
 
