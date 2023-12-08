@@ -178,31 +178,34 @@ Features and the Node.js version required for them
 
 # TODO
 
-## M1 - stdout output only
+## M1 (0.1.0) - stdout output only, some API and field formats might change
 
 First milestone will not have user-definable streams; it is hardcoded to stdout.
 Multiple and customizable streams will come later. There are no user-definable
 serializers, just the built-in `err` serializer.
 
-WARNING: `log.level()` might change. `time` field might change.
+WARNING: `log.level()` API might change. `time` field format might change.
 
-- moar tests
-- decide on time field:
-  - perf call?
+## M2 - `.child()`, perf/benchmarking, time format, `log.level` API change
+
 - simplify the `log.info(err, msg)` case to just have `{err: err}` and pass to
   later code? Can that obsolete the second arg to _applySerializers?
 - switch to pino's `log.level`  setter/getter? rather than overloaded `log.level([level])`? I think pino's is cleaner.
-- perf: pino sets `.debug` to function noop if Logger level is higher. That
-  might help with perf
-
-## M2 - `.child()`
-
-```js
-    if (parent && opts.name) {
-        // XXX does pino.child allow changing 'name'? Is there a strong reason we don't allow this?
-        throw new TypeError('invalid options.name: child cannot set logger name');
-    }
-```
+- perf: pino sets `.debug` et al to function noop if Logger level is higher. That
+  might help with perf. That means setting those attributes on the instance
+  rather than on the prototype, FWIW.
+- decide on time field:
+  - perf call?
+  - care about overflow if ms-since-epoch?
+  - what about hrtime? Could that be allowed?
+- `.child()` ?
+    ```js
+        if (parent && opts.name) {
+            // XXX does pino.child allow changing 'name'? Is there a strong reason we don't allow this?
+            throw new TypeError('invalid options.name: child cannot set logger name');
+        }
+    ```
+- moar tests
 
 ## M3 - custom and multiple streams
 
@@ -224,6 +227,8 @@ WARNING: `log.level()` might change. `time` field might change.
   - TODO: think through how plugins will work for adding and creating streams.
   - Do we add the complexity of pre-rendered static fields?
 - How to disable the default stream and have *no* stream? Granted it is a weird case.
+
+## M4 - custom serializers? pretty-printing CLI
 
 ## later
 
