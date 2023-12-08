@@ -166,13 +166,15 @@ than v10.
 
 - deps:
   - `safe-stable-stringify` has `"node": ">=10"`
-- features and the Node.js version
-  - `class`, node 6
-  - arrow functions, node 4
-  - Object.assign, node 4
-  - `const`, basic support was in node 0.10. Good enough?
-  - object destructuring, something newer than node 0.10
-  - object property shorthard (`exports = { TRACE }`), something new than node 0.10
+
+Features and the Node.js version required for them
+- `class`, node 6
+- arrow functions, node 4
+- Object.assign, node 4
+- `const`, basic support was in node 0.10. Good enough?
+- object destructuring, something newer than node 0.10
+- object property shorthard (`exports = { TRACE }`), something new than node 0.10
+
 
 # TODO
 
