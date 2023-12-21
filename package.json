@@ -21,7 +21,9 @@
     "lib"
   ],
   "scripts": {
-    "lint": "eslint --ext=js,mjs,cjs . # requires node >=16.0.0",
+    "lint": "npm run lint:eslint && npm run lint:types",
+    "lint:eslint": "eslint --ext=js,mjs,cjs . # requires node >=16.0.0",
+    "lint:types": "tsc",
     "lint:fix": "eslint --ext=js,mjs,cjs --fix . # requires node >=16.0.0",
     "test": "tape 'test/**/*.test.js'",
     "test:min": "./scripts/test-with-node-vers.sh 10.0.0",
@@ -30,13 +32,15 @@
     "test:max": "./scripts/test-with-node-vers.sh 21"
   },
   "devDependencies": {
+    "@types/node": "^20.10.5",
     "eslint": "^8.55.0",
     "eslint-config-prettier": "^9.1.0",
     "eslint-plugin-import": "^2.29.0",
     "eslint-plugin-n": "^16.3.1",
     "eslint-plugin-prettier": "^5.0.1",
     "eslint-plugin-promise": "^6.1.1",
-    "tape": "^5.7.2"
+    "tape": "^5.7.2",
+    "typescript": "^4.4.4"
   },
   "dependencies": {
     "safe-stable-stringify": "^2.4.3"
