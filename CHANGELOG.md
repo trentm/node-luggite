@@ -2,6 +2,8 @@
 
 ## Unreleased
 
+## v0.2.0
+
 - Added jsdoc-based types. This is a *start* at supporting types for IDE
   completion TypeScript users.
 
