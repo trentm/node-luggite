@@ -2,5 +2,6 @@
 /.vscode
 /.nyc_output
 /npm-debug.log
+/build
 node_modules
 tmp

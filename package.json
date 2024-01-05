@@ -29,7 +29,8 @@
     "test:min": "./scripts/test-with-node-vers.sh 10.0.0",
     "test:allvers": "./scripts/test-with-node-vers.sh 10.0.0 10 12 14 16 18 20 21",
     "test:minmax": "./scripts/test-with-node-vers.sh 10.0.0 21",
-    "test:max": "./scripts/test-with-node-vers.sh 21"
+    "test:max": "./scripts/test-with-node-vers.sh 21",
+    "dev:build-dts": "tsc -p ./scripts/tsconfig.dts.json && ls build/luggite.d.ts"
   },
   "devDependencies": {
     "@types/node": "^20.10.5",

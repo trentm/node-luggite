@@ -192,12 +192,15 @@ Features and the Node.js version required for them
 
 - simplify the `log.info(err, msg)` case to just have `{err: err}` and pass to
   later code? Can that obsolete the second arg to _applySerializers?
-- switch to pino's `log.level`  setter/getter? rather than overloaded `log.level([level])`? I think pino's is cleaner.
+- switch to pino's `log.level`  setter/getter? rather than overloaded `log.level([level])`? I think pino's is cleaner. Some subtlety when have multiple streams. Should it change all of them? Hrm.
 - perhaps change `log.info()` no args to a separate API call? Not sure. How
-  much of a perf gain is not having that boolean check?
+  much of a perf gain is not having that boolean check?  Typing is a PITA with
+  this call signature. I'm inclined to change to isEnabledFor() or equiv.
+  What do others do?
 - perf: pino sets `.debug` et al to function noop if Logger level is higher. That
   might help with perf. That means setting those attributes on the instance
   rather than on the prototype, FWIW.
+  This also might help with autocomplete.
 - decide on time field:
   - perf call?
   - care about overflow if ms-since-epoch?

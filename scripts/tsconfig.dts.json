@@ -1,0 +1,13 @@
+// A tsconfig to generate a .d.ts file for a developer to look at.
+//
+// Note: We don't intend to *ship* a .d.ts file because we think we can do
+// better with jsdoc comments. The intent is to use the .d.ts file to get
+// a summary of what TypeScript sees with the current JS and jsdoc comments.
+{
+  "extends": "../tsconfig.json",
+  "compilerOptions": {
+    "noEmit": false,
+    "outDir": "../build",
+    "declaration": true, // Generate d.ts files
+  }
+}
