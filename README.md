@@ -1,7 +1,11 @@
-A Node.js logger for luddites.
+A Node.js JSON logger for luddites.
 
 More seriously this is me playing with a Node.js logger that is as simple as
 possible, but good enough for what I want.
+
+**Current status: This is currently very alpha. I would not suggest anyone use
+it yet. I expect to break compat before stabilizing. The rest of README is more
+notes to myself than for a user of this lib.**
 
 # Design notes
 
