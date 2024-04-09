@@ -2,7 +2,6 @@
   "name": "luggite",
   "version": "0.2.1",
   "description": "simple Node.js JSON logging",
-  "private": true,
   "main": "./lib/luggite.js",
   "repository": {
     "type": "git",
