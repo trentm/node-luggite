@@ -2,6 +2,10 @@
 
 ## Unreleased
 
+## v0.2.1
+
+- Some minor jsdoc type improvements.
+
 ## v0.2.0
 
 - Added jsdoc-based types. This is a *start* at supporting types for IDE

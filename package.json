@@ -1,6 +1,6 @@
 {
   "name": "luggite",
-  "version": "0.2.0",
+  "version": "0.2.1",
   "description": "simple Node.js JSON logging",
   "private": true,
   "main": "./lib/luggite.js",
@@ -22,9 +22,10 @@
     "lib"
   ],
   "scripts": {
-    "lint": "npm run lint:eslint && npm run lint:types",
+    "lint": "npm run lint:eslint && npm run lint:types && npm run lint:version",
     "lint:eslint": "eslint --ext=js,mjs,cjs . # requires node >=16.0.0",
     "lint:types": "tsc",
+    "lint:version": "node ./scripts/lint-version.js",
     "lint:fix": "eslint --ext=js,mjs,cjs --fix . # requires node >=16.0.0",
     "test": "tape 'test/**/*.test.js'",
     "test:min": "./scripts/test-with-node-vers.sh 10.0.0",
